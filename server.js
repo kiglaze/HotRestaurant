@@ -49,7 +49,12 @@ app.post("/api/tables", function(req, res) {
 	res.json(tables);
 })
 
-app.post("/api/reserve", function(req, res) {
+app.get("/api/displayTables", function(req, res) {
+  // We then display the JSON to the users
+  res.json(tables);
+});
+
+app.get("/api/reserve", function(req, res) {
   // We then display the JSON to the users
   res.json(waitlist);
 });
