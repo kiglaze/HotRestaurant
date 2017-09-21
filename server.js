@@ -27,6 +27,11 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "home.html"));
 });
 
+// Basic route that sends the user first to the AJAX Page
+app.get("/home", function(req, res) {
+  res.sendFile(path.join(__dirname, "home.html"));
+});
+
 app.get("/tables", function(req, res) {
   res.sendFile(path.join(__dirname, "tables.html"));
 });
@@ -55,9 +60,14 @@ app.post("/api/tables", function(req, res) {
 	res.json(tables);
 })
 
-app.post("/api/reserve", function(req, res) {
+app.get("/api/displayTables", function(req, res) {
   // We then display the JSON to the users
-  res.json(waitlist);
+  return res.json(tables);
+});
+
+app.get("/api/reserve", function(req, res) {
+  // We then display the JSON to the users
+  return res.json(waitlist);
 });
 
 app.post("/api/new", function(req, res) {
