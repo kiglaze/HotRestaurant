@@ -3,8 +3,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
-// Here we require/import the HTTP module
-var http = require("http");
 
 // Here we define a port to listen to
 var PORT = 8080;
@@ -17,16 +15,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
-
-// Here we create a generic function to handle requests and responses
-function handleRequest(request, response) {
-  // The below statement is triggered (client-side) when the user visits the PORT URL
-  response.end("It Works!! Path Hit: " + request.url);
-}
-// Here we use the Node HTTP package to create our server.
-// We then pass it the handleRequest function to empower it with functionality.
-var server = http.createServer(handleRequest);
-// Here we start our server so that it can begin listening to client requests.
 
 // variables for tables and reserve
 // var customers = [];
@@ -50,8 +38,10 @@ app.get("/reserve", function(req, res) {
 app.post("/api/tables", function(req, res) {
 	if(tables.length <= MAX_TABLES) {
 		tables.push(newCustomer);
+		alert("You table awaits, this way please!");
 	} else {
 		waitlist.push(newCustomer);
+		alert("Sorry, you are placed in waiting list.");
 	}
   	console.log(tables);
   	console.log(waitlist);
