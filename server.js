@@ -29,8 +29,10 @@ var server = http.createServer(handleRequest);
 // Here we start our server so that it can begin listening to client requests.
 
 // variables for tables and reserve
+// var customers = [];
 var tables = [];
-var reserve = [];
+var waitlist = [];
+const MAX_TABLES = 5;
 
 // Basic route that sends the user first to the AJAX Page
 app.get("/", function(req, res) {
@@ -43,6 +45,23 @@ app.get("/tables", function(req, res) {
 
 app.get("/reserve", function(req, res) {
   res.sendFile(path.join(__dirname, "reserve.html"));
+});
+
+app.post("/api/tables", function(req, res) {
+	if(tables.length < MAX_TABLES) {
+		tables.push(newCustomer);
+	} else {
+		waitlist.push(newCustomer);
+	}
+  	console.log(tables);
+  	console.log(waitlist);
+	// We then display the JSON to the users
+	res.json(tables);
+})
+
+app.post("/api/reserve", function(req, res) {
+  // We then display the JSON to the users
+  res.json(waitlist);
 });
 
 server.listen(PORT, function() {
