@@ -40,7 +40,13 @@ app.get("/reserve", function(req, res) {
   res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
+app.get("/assets/js/make-reservation.js", function(req, res) {
+  res.sendFile(path.join(__dirname, "assets/js/make-reservation.js"));
+});
+
 app.post("/api/tables", function(req, res) {
+  var newCustomer = req.body;
+  console.log(newCustomer);
 	if(tables.length <= MAX_TABLES) {
 		tables.push(newCustomer);
 		alert("You table awaits, this way please!");
@@ -62,6 +68,20 @@ app.get("/api/displayTables", function(req, res) {
 app.get("/api/reserve", function(req, res) {
   // We then display the JSON to the users
   return res.json(waitlist);
+});
+
+app.post("/api/new", function(req, res) {
+  var newCustomer = req.body;
+  console.log(newCustomer);
+  if(tables.length <= MAX_TABLES) {
+    tables.push(newCustomer);
+    console.log("You table awaits, this way please!");
+  } else {
+    waitlist.push(newCustomer);
+    console.log("Sorry, you are placed in waiting list.");
+  }
+
+  res.json(newCustomer);
 });
 
 app.listen(PORT, function() {
