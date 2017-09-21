@@ -54,7 +54,7 @@ app.post("/api/reserve", function(req, res) {
   res.json(waitlist);
 });
 
-server.listen(PORT, function() {
+app.listen(PORT, function() {
   // The below statement is triggered (server-side) when a user visits the PORT URL
   console.log("Server listening on: http://localhost:%s", PORT);
 });
