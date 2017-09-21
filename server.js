@@ -36,7 +36,7 @@ const MAX_TABLES = 5;
 
 // Basic route that sends the user first to the AJAX Page
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "home.html"));
 });
 
 app.get("/tables", function(req, res) {
@@ -48,7 +48,7 @@ app.get("/reserve", function(req, res) {
 });
 
 app.post("/api/tables", function(req, res) {
-	if(tables.length < MAX_TABLES) {
+	if(tables.length <= MAX_TABLES) {
 		tables.push(newCustomer);
 	} else {
 		waitlist.push(newCustomer);
