@@ -57,31 +57,21 @@ app.post("/api/tables", function(req, res) {
   	console.log(tables);
   	console.log(waitlist);
 	// We then display the JSON to the users
-	res.json(tables);
+  var result = {
+    "tables": tables,
+    "waitlist": waitlist
+  }
+	res.json(result);
 })
 
 app.get("/api/displayTables", function(req, res) {
   // We then display the JSON to the users
-  return res.json(tables);
+  res.json(tables);
 });
 
 app.get("/api/reserve", function(req, res) {
   // We then display the JSON to the users
-  return res.json(waitlist);
-});
-
-app.post("/api/new", function(req, res) {
-  var newCustomer = req.body;
-  console.log(newCustomer);
-  if(tables.length <= MAX_TABLES) {
-    tables.push(newCustomer);
-    console.log("You table awaits, this way please!");
-  } else {
-    waitlist.push(newCustomer);
-    console.log("Sorry, you are placed in waiting list.");
-  }
-
-  res.json(newCustomer);
+  res.json(waitlist);
 });
 
 app.listen(PORT, function() {

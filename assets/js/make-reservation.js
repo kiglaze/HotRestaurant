@@ -6,7 +6,7 @@ $(document).ready(function() {
 		var phoneNumber = $("#phone-number").val();
 		var email = $("#email").val();
 		var uniqueId = $("#unique-id").val();
-		$.post('api/new', {
+		$.post('api/tables', {
 			name: name, 
 			phone: phoneNumber,
 			email: email,
